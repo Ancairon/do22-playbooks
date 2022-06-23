@@ -1,20 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: keycloak
+  type: LoadBalancer
+---
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: keycloak
-  strategy:
-    type: Recreate
+      app: keycloak
   template:
+    metadata:
+      labels:
+        app: keycloak
     spec:
       containers:
         - env:
             - name: DB_VENDOR
               value: h2
             - name: KEYCLOAK_IMPORT
-              value: /opt/keycloak/realm.json
+              value: /home/jenkins/keycloak.json
             - name: KEYCLOAK_PASSWORD
               value: password
             - name: KEYCLOAK_USER
@@ -25,22 +45,16 @@ spec:
             - containerPort: 8080
           resources: {}
           volumeMounts:
-            - mountPath: /opt/keycloak/realm.json
+            - mountPath: /home/jenkins/keycloak.json
               name: keycloak-pvc
       restartPolicy: Always
       volumes:
         - name: keycloak-pvc
           persistentVolumeClaim:
             claimName: keycloak-pvc
-status: {}
----
-apiVersion: v1
-kind: Service
-name: keycloak
-spec:
-  ports:
-    - name: "8080"
-      port: 8080
-      targetPort: 8080
-status:
-  loadBalancer: {}
+      readinessProbe:
+        httpGet:
+          path: /realms/master
+          port: 8080
+
+#this runs in port 32534
