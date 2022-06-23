@@ -48,13 +48,13 @@ spec:
             - mountPath: /home/jenkins/keycloak.json
               name: keycloak-pvc
       restartPolicy: Always
-      volumes:
-        - name: keycloak-pvc
-          persistentVolumeClaim:
-            claimName: keycloak-pvc
       readinessProbe:
         httpGet:
           path: /realms/master
           port: 8080
+      volumes:
+        - name: keycloak-pvc
+          persistentVolumeClaim:
+            claimName: keycloak-pvc
 
 #this runs in port 32534
