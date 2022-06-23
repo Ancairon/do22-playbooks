@@ -45,7 +45,7 @@ pipeline {
             steps{
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/keycloack.yml"
 
-                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/keycloak-pvc"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/keycloak-pvc.yml"
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-pv.yml"
 
