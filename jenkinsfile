@@ -43,19 +43,17 @@ pipeline {
 
         stage ('Deploy Kubernetes'){
             steps{
-                sh "microk8s microk8s kubectl apply -f playbooks/files/kubernetes/keycloack.yml"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/keycloack.yml"
 
-                sh "microk8s microk8s kubectl apply -f playbooks/files/kubernetes/keycloak-pvc"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/keycloak-pvc"
 
-                sh "mkdir mysql-kube"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-pv.yml"
 
-                sh "microk8s kubectl apply -f playbooks/files/kubernetes/mysql-pv.yml"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-pvc.yml"
 
-                sh "microk8s kubectl apply -f playbooks/files/kubernetes/mysql-pvc.yml"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql.yml"
 
-                sh "microk8s kubectl apply -f playbooks/files/kubernetes/mysql.yml"
-
-                sh "microk8s kubectl apply -f playbooks/files/kubernetes/mysql-service.yml"
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-service.yml"
 
                 sh "microk8s helm3 repo add codecentric https://codecentric.github.io/helm-charts && microk8s helm3 install mailhog codecentric/mailhog"
 
