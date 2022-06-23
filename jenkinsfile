@@ -32,9 +32,9 @@ pipeline {
         stage ('Build application jar and image'){
             steps{
 
-                sh " cd Recommendation-Letter-Service && chmod +x mvnw"
+                sh "cd Recommendation-Letter-Service && chmod +x mvnw"
 
-                sh "cd cd Recommendation-Letter-Service && ./mvnw package -DskipTests"
+                sh "cd Recommendation-Letter-Service && ./mvnw package -DskipTests"
 
                 sh "cd Recommendation-Letter-Service && docker build ./ -t spring_boot_app"
 
