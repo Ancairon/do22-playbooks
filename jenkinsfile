@@ -31,7 +31,9 @@ pipeline {
 
         stage ('Build application jar and image'){
             steps{
-
+                
+                sh "sudo chmod 666 /var/run/docker.sock"
+                
                 sh "cd Recommendation-Letter-Service && chmod +x mvnw"
 
                 sh "cd Recommendation-Letter-Service && ./mvnw package -DskipTests"
