@@ -7,7 +7,7 @@ pipeline {
 
                 sh "sudo usermod -a -G microk8s jenkins"
 
-                sh "sudo mkdir ~/.kube"
+                sh "sudo mkdir -p /.kube"
 
                 sh "sudo chown -f -R jenkins ~/.kube"
 
