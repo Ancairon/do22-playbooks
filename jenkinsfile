@@ -54,6 +54,10 @@ pipeline {
 
                 sh "sudo microk8s kubectl create -f https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak.yaml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
 
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/spring-boot-app-deployment.yaml"
+
+                sh "microk8s.kubectl apply -f playbooks/files/kubernetes/spring-boot-app-service.yaml"
+
                 // sh "microk8s.kubectl app -f playbooks/files/kubernetes/keycloak-pvc.yaml"
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-pv.yml"
