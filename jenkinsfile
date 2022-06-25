@@ -58,7 +58,7 @@ pipeline {
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-service.yml"
 
-                sh "microk8s helm3 repo add codecentric https://codecentric.github.io/helm-charts && microk8s helm3 install mailhog codecentric/mailhog"
+                sh "sudo microk8s helm3 repo add codecentric https://codecentric.github.io/helm-charts && microk8s helm3 upgrade --install mailhog codecentric/mailhog"
 
             }
         }
