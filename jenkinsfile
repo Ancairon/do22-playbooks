@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Prepare machine for deployment'){
             steps{
+
                 sh "sudo snap install microk8s --classic"
 
                 sh "sudo usermod -a -G microk8s jenkins"
@@ -11,8 +12,11 @@ pipeline {
 
                 sh "sudo chown -f -R jenkins ~/.kube"
 
-                sh "microk8s enable helm3"
+                sh "sudo ufw default allow routed"
 
+                sh "microk8s enable helm3 dns storage ingress"
+
+                sh "sudo ufw allow in on ens4 && sudo ufw allow out on ens4"
             }
         }
         stage('Clone Repositories'){
