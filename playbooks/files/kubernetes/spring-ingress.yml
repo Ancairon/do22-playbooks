@@ -3,9 +3,6 @@ kind: Ingress
 metadata:
   name: spring
 spec:
-  tls:
-    - hosts:
-      - devops22.cloudns.ph
   rules:
   - host: devops22.cloudns.ph
     http:
