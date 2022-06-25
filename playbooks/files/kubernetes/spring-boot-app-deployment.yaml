@@ -24,8 +24,8 @@ spec:
         io.kompose.service: spring-boot-app
     spec:
       containers:
-        - image: spring_boot_app
-          name: spring-boot-app
+        - name: spring-boot-app
+          image: localhost:32000/spring-boot-app:latest
           ports:
             - containerPort: 80
           resources: {}
