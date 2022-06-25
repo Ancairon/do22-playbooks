@@ -40,7 +40,7 @@ pipeline {
 
                 sh "cd Recommendation-Letter-Service && docker build ./ -t spring_boot_app"
 
-                sh "sudo rmdir Recommendation-Letter-Service"
+                sh "sudo rm -rf Recommendation-Letter-Service/"
             }
         }
 
