@@ -53,7 +53,6 @@ pipeline {
                 //sh "microk8s.kubectl create -f playbooks/files/kubernetes/keycloack.yml"
 
                 sh "sudo microk8s kubectl create -f playbooks/files/kubernetes/keycloack.yml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
-"
 
                 // sh "microk8s.kubectl app -f playbooks/files/kubernetes/keycloak-pvc.yaml"
 
