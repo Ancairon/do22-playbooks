@@ -6,7 +6,7 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: keycloak.devops22.cloudns.ph
+  - host: www.keycloak.devops22.cloudns.ph
     http:
       paths:
       - path: /
