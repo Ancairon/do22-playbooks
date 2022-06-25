@@ -13,6 +13,22 @@ spec:
     app: keycloak
   type: LoadBalancer
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: keycloak-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+#this runs in port 32534
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,13 +64,23 @@ spec:
               path: /realms/master
               port: 8080
           resources: {}
-          volumeMounts:
-            - mountPath: /home/jenkins/keycloak.json
-              name: keycloak-pvc
-      restartPolicy: Always
-      volumes:
-        - name: keycloak-pvc
-          persistentVolumeClaim:
-            claimName: keycloak-pvc
-
-#this runs in port 32534
+      #     volumeMounts:
+      #       - mountPath: /home/jenkins/keycloak.json
+      #         name: keycloak-pvc
+      # restartPolicy: Always
+      # volumes:
+      #   - name: keycloak-pvc
+      #     persistentVolumeClaim:
+      #       claimName: keycloak-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: keycloak-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
