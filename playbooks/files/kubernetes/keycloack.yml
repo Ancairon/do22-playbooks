@@ -29,6 +29,8 @@ spec:
           value: "password"
         - name: KC_PROXY
           value: "edge"
+        - name: KEYCLOAK_IMPORT
+          value: /opt/realm.json
         ports:
         - name: http
           containerPort: 8080

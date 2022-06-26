@@ -31,7 +31,7 @@ pipeline {
             steps{
                 sh "mv playbooks/files/application.properties Recommendation-Letter-Service/application.properties"
 
-                sh "cp playbooks/files/keycloak_realm.json /opt/realm.json"
+                sh "sudo cp playbooks/files/keycloak_realm.json /opt/realm.json"
             }
         }
 
