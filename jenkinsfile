@@ -6,6 +6,7 @@ pipeline {
 
                 sh "sudo snap install microk8s --classic"
 
+                sh "sudo apt install docker.io"
 
                 sh "sudo usermod -a -G microk8s jenkins"
 
@@ -30,7 +31,7 @@ pipeline {
             steps{
                 sh "mv playbooks/files/application.properties Recommendation-Letter-Service/application.properties"
 
-                sh "cp playbooks/files/keycloak_realm.json /home/jenkins/keycloak.json"
+                sh "cp playbooks/files/keycloak_realm.json /opt/realm.json"
             }
         }
 
@@ -62,8 +63,6 @@ pipeline {
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/spring-boot-app-service.yaml"
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/spring-ingress.yml"
-
-                // sh "microk8s.kubectl app -f playbooks/files/kubernetes/keycloak-pvc.yaml"
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/mysql-pv.yml"
 

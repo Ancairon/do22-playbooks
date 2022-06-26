@@ -16,6 +16,8 @@ spec:
       containers:
         - image: mysql:8.0
           name: mysql
+          command: ["mysql"]
+          args: ["-e","\"CREATE DATABASE devops_2022;\""]
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: password
