@@ -16,7 +16,7 @@ pipeline {
 
                 sh "sudo ufw default allow routed"
 
-                sh "microk8s enable helm3 dns storage ingress regisrty"
+                sh "microk8s.enable dns storage ingress helm3 registry"
 
                 sh "sudo ufw allow in on ens4 && sudo ufw allow out on ens4"
             }
