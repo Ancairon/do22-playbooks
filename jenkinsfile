@@ -54,7 +54,9 @@ pipeline {
 
         stage ('Deploy Kubernetes'){
             steps{
-                sh "microk8s.kubectl create -f playbooks/files/kubernetes/keycloak-ingress.yml"
+                // sh "microk8s.kubectl create -f playbooks/files/kubernetes/keycloak-ingress.yml"
+
+                sh "sudo microk8s kubectl create -f playbooks/files/kubernetes/keycloack-ingress.yml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
 
                 sh "sudo microk8s kubectl create -f https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak.yaml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
 
