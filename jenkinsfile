@@ -58,7 +58,8 @@ pipeline {
 
                 sh "sudo microk8s kubectl create -f playbooks/files/kubernetes/keycloak-ingress.yml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
 
-                sh "sudo microk8s kubectl create -f https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak.yaml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
+                //sh "sudo microk8s kubectl create -f https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak.yaml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
+                sh "sudo microk8s kubectl create -f playbooks/files/kubernetes/keycloak.yml --dry-run=client -o yaml | sudo microk8s kubectl apply -f -"
 
                 sh "microk8s.kubectl apply -f playbooks/files/kubernetes/spring-boot-app-deployment.yaml"
 
