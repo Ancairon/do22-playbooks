@@ -1,10 +1,9 @@
 # do22-playbooks
 
-To test playbooks in this repo, do: \
-`cd /vagrant` \
-`vagrant up` \
-Check that you can ssh into vm1 by running: `vagrant ssh vm1`. \
-After that, run `vagrant ssh-config >> ~/.ssh/config` to append the ssh config into your home folder's config, this will enable ansible to run playbooks on this machine.
-`cd ..` \
 
-Run your playbooks with `ansible-playbook`...
+To run the app `cd` into the vagrant directory, and do `vagrant up`. \
+Ensure that the ip inside the `hosts` file is the correct one.
+
+cd out of the directory into the root folder of the project and run `ansible-playbook playbooks/install.yml`. \
+
+This will build the whole app with Docker.
